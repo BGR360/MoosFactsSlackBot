@@ -1,0 +1,23 @@
+{
+  "name": "moos-facts-slack-bot",
+  "version": "0.0.0",
+  "description": "Learn more about Moos!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.eecs.umich.edu:bgreeves/MoosFactsSlackBot.git"
+  },
+  "keywords": [
+    "Slack",
+    "Integration",
+    "Facts"
+  ],
+  "author": "Ben Reeves",
+  "license": "MIT",
+  "engines": {
+    "node": "4.1.1"
+  }
+}
