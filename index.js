@@ -1,5 +1,6 @@
 var config = require('./config.js');
 var facts = require('./facts.js');
+var validation = require('./validation.js');
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -22,28 +23,16 @@ app.get('/getMoosFact', function(request, response) {
 app.post('/getMoosFact', function(request, response) {
 	
 	// Validate the Slack token
-	var correctToken = config['SlackIntegrationKey'];
-	var actualToken = request.body['token'];
-	console.log("Token sent in payload:", actualToken);
-	if (actualToken === undefined) {
-		response.status(400).send("No token specified.");
-		return;
+	if (validation.isValidRequest(request, response)) {
+		// Send a fact
+		response.json({
+			"text": facts.getSlashCommandFact()
+		});
 	}
-	if (actualToken !== correctToken) {
-		response.status(401).send("Invalid authentication token.");
-		return;
-	}
-
-	// Get a fact
-	var theFact = facts.getSlashCommandFact();
-
-	// Send the response
-	response.json({
-		"text": theFact
-	});
 
 });
 
+// First, load the json files for the Moos/moose facts. Then start up the server
 facts.initialize(function callback() {
 	app.listen(app.get('port'), function() {
 	  console.log('Node app is running on port', app.get('port'));
