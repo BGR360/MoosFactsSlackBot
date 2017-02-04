@@ -73,7 +73,7 @@ function getMoosFact() {
 	var factNumber = 30 + moosFacts.indexOf(moosFact);
 
 	return "Moos Fact " + factNumber + ": " + moosFact + " " + getExclamation()
-		+ "\\n:moos: :moos: :moos:";
+		+ "<br/>:moos: :moos: :moos:";
 }
 
 /**
@@ -125,8 +125,8 @@ function getPeriodicFact() {
  * These facts are more likely to be about moose.
  */
 
-/** Chances of getting a moose fact are 4:1 **/
-var slashCommandRand = uniqueRandomArray([ 1, 1, 1, 1, 0 ]);
+/** Chances of getting a moose fact are 3.5:1 **/
+var slashCommandRand = uniqueRandomArray([ 1, 1, 1, 0, 1, 1, 1, 1, 0 ]);
 
 function getSlashCommandFact() {
 
