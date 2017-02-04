@@ -73,7 +73,7 @@ function getMoosFact() {
 	var factNumber = 30 + moosFacts.indexOf(moosFact);
 
 	return "Moos Fact " + factNumber + ": " + moosFact + " " + getExclamation()
-		+ "<br/>:moos: :moos: :moos:";
+		+ "\n:moos: :moos: :moos:";
 }
 
 /**
