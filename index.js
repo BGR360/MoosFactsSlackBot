@@ -23,12 +23,13 @@ app.get('/getMoosFact', function(request, response) {
 
 app.post('/getMoosFact', function(request, response) {
 
-	console.log(request);
+	///console.log(request);
 	
 	// Validate the Slack token
 	if (validation.isValidRequest(request, response)) {
 		// Send a fact
 		response.json({
+			"response_type": "in_channel",
 			"text": facts.getSlashCommandFact()
 		});
 	}
