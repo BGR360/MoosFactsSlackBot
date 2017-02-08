@@ -15,7 +15,7 @@ function initialize(cb) {
 		} else {
 			console.log("Loaded subscribedUrls.json");
 			subscriptions = jsonArr;
-			cb();
+			if (cb) cb();
 		}
 	});
 }
@@ -25,6 +25,10 @@ function subscriptionExists(subscription) {
 }
 
 function addNewSubscription(subscription, cb) {
+	if (subscription === undefined || subscription === null || subscription === "") {
+		if (cb) cb();
+		return;
+	}
 	if (!subscriptionExists(subscription)) {
 		subscriptions.push(subscription);
 
@@ -34,7 +38,7 @@ function addNewSubscription(subscription, cb) {
 				console.warn("[WARN] Error saving subscriptions file locally:", err);
 			} else {
 				console.log("Added subscriber and saved subscriptions.json");
-				cb();
+				if (cb) cb();
 			}
 		});
 	}
@@ -50,14 +54,14 @@ function sendFactToAllSubscribers(fact, cb) {
 	sendToNext();
 	function sendToNext(err) {
 		if (err) {
-			cb(err);
+			if (cb) cb(err);
 			return;
 		}
 		if (i < subscriptions.length) {
 			url = subscriptions[i++];
 			sendPostRequest(url, json, sendToNext);
 		} else {
-			cb();
+			if (cb) cb();
 		}
 	}
 }
@@ -83,14 +87,14 @@ function sendPostRequest(url, json, cb) {
 	request(options, function (error, response, body) {
 		if (error) {
 			console.error("[ERR] Error sending POST request:", error);
-			cb(error);
+			if (cb) cb(error);
 		} else if (response.statusCode != 200) {
 			console.error("[ERR] POST request received non-OK status:", 
 				response.statusCode, ":", body);
-			cb("ERROR " + response.statusCode);
+			if (cb) cb("ERROR " + response.statusCode);
 		} else {
 	        console.log("POST request sent to", url);
-	        cb();
+	        if (cb) cb();
 	    }
 	});
 }
