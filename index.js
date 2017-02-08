@@ -32,7 +32,7 @@ app.post('/getMoosFact', function(request, response) {
 		// Save the new subscriber
 		var responseUrl = request.body['response_url'];
 		console.log("Response url:", responseUrl);
-		subscribers.addNewSubscription(responseUrl);
+		///subscribers.addNewSubscription(responseUrl);
 
 		// Send a fact
 		response.json({

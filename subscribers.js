@@ -47,7 +47,7 @@ function addNewSubscription(subscription, cb) {
 function sendFactToAllSubscribers(fact, cb) {
 	console.log("Sending a fact to the following subscribers:", subscriptions);
 	json = {
-		//"response_type": "in_channel",
+		"response_type": "in_channel",
 		"text": fact
 	};
 	var i = 0;
