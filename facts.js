@@ -9,6 +9,7 @@ var config = require('./config.js'),
 var moosFacts = [];
 var mooseFacts = [];
 var exclamations = [];
+var comptonQuotes = [];
 
 /**
  * Loads the three files asynchronously
@@ -32,7 +33,10 @@ function initialize(cb) {
 			console.log("Loaded mooseFacts.json");
 			loadThing('exclamations.json', exclamations, function() {
 				console.log("Loaded exclamations.json");
-				cb();
+				loadThing('comptonQuotes.json', comptonQuotes, function() {
+					console.log("Loaded comptonQuotes.json");
+					cb();
+				});
 			});
 		});
 	});
@@ -96,6 +100,24 @@ function getMooseFact(cb) {
 	return "Moose Fact " + factNumber + ": " + mooseFact + " " + getExclamation();
 }
 
+/**
+ * Returns a random Compton quote
+ */
+var comptonQuoteRand;
+function getComptonQuote(cb) {
+	if (comptonQuotes.length == 0) {
+		console.warn("Cannot get Compton quote because comptonQuotes.json did not load.");
+		return "";
+	}
+	if (comptonQuoteRand === undefined) {
+		console.log("Initializing random array for Compton quotes.");
+		comptonQuoteRand = uniqueRandomArray(comptonQuotes);
+	}
+
+	var comptonQuote = comptonQuoteRand();
+	return comptonQuote;
+}
+
 // 0 = moosFacts;
 // 1 = mooseFacts;
 
@@ -146,3 +168,4 @@ exports.getMoosFact = getMoosFact;
 exports.getMooseFact = getMooseFact;
 exports.getPeriodicFact = getPeriodicFact;
 exports.getSlashCommandFact = getSlashCommandFact;
+exports.getComptonQuote = getComptonQuote;

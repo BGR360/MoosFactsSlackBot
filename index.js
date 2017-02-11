@@ -43,6 +43,25 @@ app.post('/getMoosFact', function(request, response) {
 
 });
 
+app.get('/getComptonQuote', function(request, response) {
+	// Send a quote
+	response.json({
+		"response_type": "in_channel",
+		"text": facts.getComptonQuote()
+	});
+});
+
+app.post('/getComptonQuote', function(request, response) {
+	// Validate the Slack token
+	if (validation.isValidRequest(request, response)) {
+		// Send a quote
+		response.json({
+			"response_type": "in_channel",
+			"text": facts.getComptonQuote()
+		});
+	}
+});
+
 app.get('/getScheduledMoosFact', function(request, response) {
 	var fact = facts.getPeriodicFact();
 	subscribers.sendFactToAllSubscribers(fact, function(err) {
