@@ -74,7 +74,7 @@ app.get('/getScheduledMoosFact', function(request, response) {
 	});
 });
 
-app.any('/ping', function(request, response) {
+app.all('/ping', function(request, response) {
 	response.json({
 		text: "pong"
 	});
