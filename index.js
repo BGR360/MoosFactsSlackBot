@@ -95,6 +95,12 @@ app.post('/ping', function(request, response) {
 	}	
 });
 
+app.post('/broken', function(request, response) {
+	response.json({
+		text: "Shut up."
+	});
+});
+
 // First, load the json files for the Moos/moose facts. Then start up the server
 facts.initialize(function callback() {
 	// Second, load the subscribers list
