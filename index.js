@@ -74,10 +74,25 @@ app.get('/getScheduledMoosFact', function(request, response) {
 	});
 });
 
-app.all('/ping', function(request, response) {
-	response.json({
-		text: "pong"
-	});
+app.post('/ping', function(request, response) {
+	var message = request.body['text'];
+	if (message) {
+		// Screw you, Hannah
+		var numPings = (message.match(/\bping\b/ig) || []).length;
+		var text = "";
+		for (var i = 0; i < numPings; i++) {
+			text += "pong ";
+		}
+		// remove last space
+		text = text.substring(0, text.length - 1);
+		response.json({
+			text: text
+		});
+	} else {
+		response.json({
+			text: "pong"
+		});
+	}	
 });
 
 // First, load the json files for the Moos/moose facts. Then start up the server
