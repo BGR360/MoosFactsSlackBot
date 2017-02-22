@@ -74,6 +74,12 @@ app.get('/getScheduledMoosFact', function(request, response) {
 	});
 });
 
+app.any('/ping', function(request, response) {
+	response.json({
+		text: "pong"
+	});
+});
+
 // First, load the json files for the Moos/moose facts. Then start up the server
 facts.initialize(function callback() {
 	// Second, load the subscribers list
